@@ -3,7 +3,7 @@ import { useLogout } from "../hooks/useLogout";
 
 // styles & images
 import "./Navbar.css";
-import Temple from "../assets/temple.svg";
+import Kanban from '../assets/view_kanban_black_18dp.svg'
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function Navbar() {
@@ -14,8 +14,8 @@ export default function Navbar() {
 		<div className="navbar">
 			<ul>
 				<li className="logo">
-					<img src={Temple} alt="dojo logo" />
-					<span>The Dojo</span>
+					<img src={Kanban} alt="dojo logo" />
+					<span>Project Tracker</span>
 				</li>
 
 				{!user && (

@@ -8,13 +8,15 @@ export default function Signup() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [displayName, setDisplayName] = useState('')
+	const [firstName, setFirstName] = useState('')
+	const [lastName, setLastName] = useState('')
 	const [thumbnail, setThumbnail] = useState(null)
 	const [thumbnailError, setThumbnailError] = useState(null)
 	const { signup, isPending, error } = useSignup()
 
 	const handleSubmit = e => {
 		e.preventDefault()
-		signup(email, password, displayName, thumbnail)
+		signup(email, password, firstName, lastName, displayName, thumbnail)
 	}
 
 	const handleFileChange = e => {
@@ -62,6 +64,26 @@ export default function Signup() {
 						value={password}
 					/>
 				</label>
+				<div style={{display: 'flex', gap: '1rem'}}>
+					<label>
+						<span>First name:</span>
+						<input
+							required
+							type="test"
+							onChange={e => setFirstName(e.target.value)}
+							value={firstName}
+						/>
+					</label>
+					<label>
+						<span>Last name:</span>
+						<input
+							required
+							type="test"
+							onChange={e => setLastName(e.target.value)}
+							value={lastName}
+						/>
+					</label>
+				</div>
 				<label>
 					<span>Display name:</span>
 					<input

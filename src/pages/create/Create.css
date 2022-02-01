@@ -1,3 +1,12 @@
 .create-form {
-	max-width: 600px;
+	max-width: 1000px;
+}
+
+.create-form .row {
+	display: flex;
+	gap: 2rem;
+}
+
+.create-form .col {
+	width: 50%;
 }

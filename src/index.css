@@ -1,17 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 
 /* variables */
 :root {
+  --clr-red-10: hsl(0, 81%, 94%);
+  --clr-red-60: hsl(0, 71%, 51%);
+  --clr-red-100: hsl(0, 91%, 26%);
+  --clr-carmine-10: hsl(341, 64%, 91%);
+  --clr-carmine-60: hsl(340, 70%, 50%);
+  --clr-carmine-100: hsl(340, 92%, 29%);
+  --clr-purple-10: hsl(274, 74%, 93%);
+  --clr-purple-60: hsl(273, 65%, 56%);
+  --clr-purple-100: hsl(273, 59%, 30%);
+  --clr-indigo-10: hsl(240, 70%, 94%);
+  --clr-indigo-60: hsl(240, 70%, 59%);
+  --clr-indigo-100: hsl(242, 66%, 34%);
+  --clr-blue-10: hsl(218, 79%, 95%);
+  --clr-blue-60: hsl(217, 69%, 52%);
+  --clr-blue-100: hsl(217, 79%, 27%);
+  --clr-lightlbue-10: hsl(200, 82%, 94%);
+  --clr-lightlbue-60: hsl(202, 74%, 53%);
+  --clr-lightlbue-100: hsl(202, 87%, 25%);
+  --clr-teal-10: hsl(171, 67%, 94%);
+  --clr-teal-60: hsl(171, 71%, 43%);
+  --clr-teal-100: hsl(173, 82%, 21%);
+  --clr-green-10: hsl(150, 77%, 95%);
+  --clr-green-60: hsl(150, 72%, 44%);
+  --clr-green-100: hsl(150, 92%, 20%);
+  --clr-lime-10: hsl(87, 67%, 94%);
+  --clr-lime-60: hsl(90, 66%, 51%);
+  --clr-lime-100: hsl(90, 89%, 24%);
+  --clr-yellow-10: hsl(39, 84%, 93%);
+  --clr-yellow-60: hsl(40, 78%, 51%);
+  --clr-yellow-100: hsl(41, 95%, 29%);
+  --clr-orange-10: hsl(16, 82%, 94%);
+  --clr-orange-60: hsl(16, 74%, 52%);
+  --clr-orange-100: hsl(16, 92%, 30%);
+  --clr-slate-10: hsl(200, 43%, 95%);
+  --clr-slate-60: hsl(200, 26%, 47%);
+  --clr-slate-100: hsl(200, 27%, 20%);
+  --clr-dusk-10: hsl(227, 39%, 95%);
+  --clr-dusk-60: hsl(227, 21%, 44%);
+  --clr-dusk-100: hsl(227, 24%, 19%);
+
   --heading-color: #444;
   --text-color: #999;
-  --primary-color: #8d69f1;
-  --highlight-color: #d13267;
+  --primary-color: #003049;
+  --highlight-color: #f77f00;
   --bg-color: #f4f4f4;
+
+  --clr-status-planning: #ccc;
+  --clr-status-waiting: #00B0F0;
+  --clr-status-programming: #0070C0;
+  --clr-status-devqa: #FFFF00;
+  --clr-status-qa: #FFC000;
+  --clr-status-qc: #92D050;
+  --clr-status-prod: #00B050;
+  --clr-status-cancelled: #632523;
+  --clr-status-archived: rebeccapurple;
+  --clr-online: #00B050;
+
+  --clr-status-planning: var(--clr-dusk-10);
+  --clr-status-waiting: var(--clr-lightlbue-60);
+  --clr-status-programming: var(--clr-indigo-60);
+  --clr-status-devqa: var(--clr-yellow-60);
+  --clr-status-qa: var(--clr-orange-60);
+  --clr-status-qc: var(--clr-teal-60);
+  --clr-status-prod: var(--clr-green-60);
+  --clr-status-cancelled: var(--clr-red-100);
+  --clr-status-archived: var(--clr-purple-60);
+  --clr-online: var(--clr-status-prod);
+}
+
+* {
+  user-select: none;
 }
 
 /* base styles */
 body {
-  font-family: Poppins, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   font-size: 1.1em;
   background: var(--bg-color);
@@ -25,11 +91,6 @@ ul {
 }
 
 /* layout */
-.page-title {
-  font-size: 1em;
-  color: var(--heading-color);
-  display: inline-block;
-}
 .btn {
   background: #fff;
   padding: 8px 12px;
@@ -66,9 +127,9 @@ textarea {
   min-height: 160px;
 }
 .error {
-  color: red;
+  color: #c00;
   background: pink;
-  border: 1px solid red;
+  border: 1px solid #c00;
   border-radius: 4px;
   padding: 8px;
   margin: 10px 0;

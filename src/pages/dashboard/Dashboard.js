@@ -1,4 +1,4 @@
-import ProjectList from '../../components/ProjectList'
+import ProjectCard from '../../components/ProjectCard'
 import { useCollection } from '../../hooks/useCollection'
 import ProjectFilter from './ProjectFilter'
 import { useState } from 'react'
@@ -10,7 +10,7 @@ import './Dashboard.css'
 export default function Dashboard() {
 	const { user } = useAuthContext()
 	const { documents, error } = useCollection('projects')
-	const [currentFilter, setCurrentFilter] = useState('all')
+	const [currentFilter, setCurrentFilter] = useState('active')
 
 	const changeFilter = (newFilter) => {
 		setCurrentFilter(newFilter)
@@ -20,6 +20,8 @@ export default function Dashboard() {
 		switch (currentFilter) {
 			case 'all':
 				return true
+			case 'active':
+				return !(document.status === 'archived' || document.status === 'cancelled') ? true : false
 			case 'mine':
 				let assignedToMe = false
 				document.assignedUsersList.forEach((u) => {
@@ -28,12 +30,16 @@ export default function Dashboard() {
 					}
 				})
 				return assignedToMe
-			case 'development':
-			case 'design':
-			case 'marketing':
-			case 'sales':
-				console.log(document.category, currentFilter)
-				return document.category === currentFilter
+			case 'planning':
+			case 'waiting':
+			case 'programming':
+			case 'devqa':
+			case 'qa':
+			case 'qc':
+			case 'prod':
+			case 'cancelled':
+			case 'archived':
+				return document.status.toLowerCase() === currentFilter.toLowerCase()
 			default:
 				return true
 		}
@@ -46,7 +52,7 @@ export default function Dashboard() {
 			{documents && (
 				<ProjectFilter currentFilter={currentFilter} changeFilter={changeFilter} />
 			)}
-			{projects && <ProjectList projects={projects} />}
+			{projects && <ProjectCard projects={projects} />}
 		</div>
 	)
 }

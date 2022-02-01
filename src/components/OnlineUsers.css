@@ -1,7 +1,7 @@
 .user-list {
-  width: 250px;
-  min-width: 250px;
-  padding: 30px;
+  width: 225px;
+  min-width: 225px;
+  padding: 1rem;
   box-sizing: border-box;
   background: #fbfbfb;
   color: var(--heading-color);
@@ -18,18 +18,16 @@
   justify-content: flex-end;
   align-items: center;
   margin: 20px auto;
+  gap: .5rem;
 }
 .user-list .avatar {
-  margin-left: 10px;
   width: 40px;
   height: 40px;
 }
 .user-list .online-user {
 	display: inline-block;
-	margin-right: 10px;
 	width: 12px;
 	height: 12px;
-	background: #0ebb50;
+	background: var(--clr-online);
 	border-radius: 50%;
-	margin-top: 2px;
 }

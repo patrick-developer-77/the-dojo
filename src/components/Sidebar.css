@@ -1,6 +1,6 @@
 .sidebar {
-	width: 300px;
-	min-width: 300px;
+	width: 200px;
+	min-width: 200px;
 	background: var(--primary-color);
 	min-height: 100vh;
 	box-sizing: border-box;
@@ -17,6 +17,10 @@
 	letter-spacing: 1px;
 	padding: 40px 30px;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.sidebar .user a {
+	color: #fff;
+	text-decoration: none;
 }
 .sidebar .links {
 	margin-top: 80px;
@@ -38,7 +42,7 @@
 	filter: invert(100%);
 }
 .sidebar .links a.active {
-	color: #555;
+	color: #333;
 	background: var(--bg-color);
 	border-radius: 20px 0 0 20px;
 }

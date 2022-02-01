@@ -4,32 +4,43 @@ import { useCollection } from '../../hooks/useCollection'
 import { timestamp } from '../../firebase/config'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import { useFirestore } from '../../hooks/useFirestore'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 
 // styles
 import './Create.css'
 
-const categories = [
-	{ value: 'development', label: 'Development' },
-	{ value: 'design', label: 'Design' },
-	{ value: 'sales', label: 'Sales' },
-	{ value: 'marketing', label: 'Marketing' }
+const statuses = [
+	{ value: 'planning', label: 'Planning' },
+	{ value: 'waiting', label: 'Waiting' },
+	{ value: 'programming', label: 'Programming' },
+	{ value: 'devQA', label: 'DevQA' },
+	{ value: 'qa', label: 'QA' },
+	{ value: 'qc', label: 'QC' },
+	{ value: 'prod', label: 'Prod' },
+	{ value: 'cancelled', label: 'Cancelled' },
+	{ value: 'archived', label: 'Archived' }
 ]
 
 export default function Create() {
-	const history = useHistory()
+	const navigate = useNavigate()
 	const { addDocument, response } = useFirestore('projects')
 	const { documents } = useCollection('users')
 	const [users, setUsers] = useState([])
 	const { user } = useAuthContext()
 
 	// form field values
-	const [name, setName] = useState('')
+	const [client, setClient] = useState('')
 	const [details, setDetails] = useState('')
-	const [dueDate, setDueDate] = useState('')
-	const [category, setCategory] = useState('')
+	const [devStartDate, setDevStartDate] = useState('')
+	const [devQADate, setDevQADate] = useState('')
+	const [qaDate, setQADate] = useState('')
+	const [qcDate, setQCDate] = useState('')
+	const [prodDate, setProdDate] = useState('')
+	const [status, setStatus] = useState('')
 	const [assignedUsers, setAssignedUsers] = useState([])
 	const [formError, setFormError] = useState(null)
+	const [maestro, setMaestro] = useState('')
+	const [billing, setBilling] = useState('')
 
 
 	useEffect(() => {
@@ -45,8 +56,8 @@ export default function Create() {
 		e.preventDefault()
 		setFormError(null)
 
-		if (!category) {
-			setFormError('Please select a project category')
+		if (!status) {
+			setFormError('Please select a project status')
 			return
 		}
 		if (assignedUsers.length < 1) {
@@ -69,18 +80,24 @@ export default function Create() {
 		})
 
 		const project = {
-			name,
+			client,
 			details,
-			category: category.value,
-			dueDate: timestamp.fromDate(new Date(dueDate)),
+			status: status.value,
+			devStartDate: timestamp.fromDate(new Date(devStartDate)),
+			devQADate: timestamp.fromDate(new Date(devQADate)),
+			qaDate: timestamp.fromDate(new Date(qaDate)),
+			qcDate: timestamp.fromDate(new Date(qcDate)),
+			prodDate: timestamp.fromDate(new Date(prodDate)),
 			comments: [],
 			createdBy,
-			assignedUsersList
+			assignedUsersList,
+			maestro,
+			billing
 		}
 
 		await addDocument(project)
 		if (!response.error) {
-			history.push('/')
+			navigate('/')
 		}
 	}
 
@@ -88,53 +105,111 @@ export default function Create() {
 		<div className="create-form">
 			<h2 className="page-title">Create a new project</h2>
 			<form onSubmit={handleSubmit}>
-				<label>
-					<span>Project name:</span>
-					<input
-						required
-						type="text"
-						onChange={(e) => setName(e.target.value)}
-						value={name}
-					/>
-				</label>
-				<label>
-					<span>Project details:</span>
-					<textarea
-						required
-						type="text"
-						onChange={(e) => setDetails(e.target.value)}
-						value={details}
-					></textarea>
-				</label>
-				<label>
-					<span>Set due date:</span>
-					<input
-						required
-						type="date"
-						onChange={(e) => setDueDate(e.target.value)}
-						value={dueDate}
-					/>
-				</label>
-				<label>
-					<span>Project category:</span>
-					<Select
-						onChange={(option) => setCategory(option)}
-						options={categories}
-						menuPlacement="top"
-					/>
-				</label>
-				<label>
-					<span>Assign to:</span>
-					<Select
-						onChange={(option) => setAssignedUsers(option)}
-						options={users}
-						isMulti
-						menuPlacement="top"
-					/>
-				</label>
-
+				<div className="row">
+					<div className="col">
+						<label>
+							<span>Client name:</span>
+							<input
+								required
+								type="text"
+								onChange={(e) => setClient(e.target.value)}
+								value={client}
+							/>
+						</label>
+						<label>
+							<span>Project details:</span>
+							<input
+								required
+								type="text"
+								onChange={(e) => setDetails(e.target.value)}
+								value={details}
+							/>
+						</label>
+						<label>
+							<span>Project status:</span>
+							<Select
+								onChange={(option) => setStatus(option)}
+								options={statuses}
+								menuPlacement="top"
+							/>
+						</label>
+						<label>
+							<span>Assign to:</span>
+							<Select
+								onChange={(option) => setAssignedUsers(option)}
+								options={users}
+								isMulti
+								menuPlacement="top"
+							/>
+						</label>
+						<label>
+							<span>Set Maestro Number:</span>
+							<input
+								required
+								type="string"
+								onChange={(e) => setMaestro(e.target.value)}
+								value={maestro}
+							/>
+						</label>
+						<label>
+							<span>Set Billing Number:</span>
+							<input
+								required
+								type="string"
+								onChange={(e) => setBilling(e.target.value)}
+								value={billing}
+							/>
+						</label>
+					</div>
+					<div className="col">
+						<label>
+							<span>Set Dev Start date:</span>
+							<input
+								required
+								type="date"
+								onChange={(e) => setDevStartDate(e.target.value)}
+								value={devStartDate}
+							/>
+						</label>
+						<label>
+							<span>Set Dev QA date:</span>
+							<input
+								required
+								type="date"
+								onChange={(e) => setDevQADate(e.target.value)}
+								value={devQADate}
+							/>
+						</label>
+						<label>
+							<span>Set QA date:</span>
+							<input
+								required
+								type="date"
+								onChange={(e) => setQADate(e.target.value)}
+								value={qaDate}
+							/>
+						</label>
+						<label>
+							<span>Set QC date:</span>
+							<input
+								required
+								type="date"
+								onChange={(e) => setQCDate(e.target.value)}
+								value={qcDate}
+							/>
+						</label>
+						<label>
+							<span>Set Prod date:</span>
+							<input
+								required
+								type="date"
+								onChange={(e) => setProdDate(e.target.value)}
+								value={prodDate}
+							/>
+						</label>
+					</div>
+				</div>
 				<button className="btn">Add Project</button>
-
 				{formError && <p className="error">{formError}</p>}
 			</form>
 		</div>

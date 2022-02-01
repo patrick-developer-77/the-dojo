@@ -1,4 +1,4 @@
-const filterList = ['all', 'mine', 'development', 'design', 'marketing', 'sales']
+const filterList = ['active', 'planning', 'waiting', 'programming', 'devqa', 'qa', 'qc', 'prod', 'cancelled', 'archived', 'mine', 'all']
 
 export default function ProjectFilter({ currentFilter, changeFilter}) {
 	const handleClick = (newFilter) => {
